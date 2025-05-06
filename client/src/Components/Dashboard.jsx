@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { GoCheckCircleFill } from "react-icons/go";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { API_URL } from "../config";
 
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
@@ -13,7 +14,7 @@ const Dashboard = () => {
     const fetchAppointments = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5003/api/v1/appointment/getall",
+          `${API_URL}/api/v1/appointment/getall`,
           { withCredentials: true }
         );
         setAppointments(data.appointments);
@@ -27,7 +28,7 @@ const Dashboard = () => {
   const handleUpdateStatus = async (appointmentId, status) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5003/api/v1/appointment/update/${appointmentId}`,
+        `${API_URL}/api/v1/appointment/update/${appointmentId}`,
         { status },
         { withCredentials: true }
       );
@@ -54,7 +55,7 @@ const Dashboard = () => {
       <section className="dashboard">
         <div className="banner">
           <div className="firstBox">
-            <img src="/doc.png" alt="docImg" />
+            <img src="doc (1).png" alt="docImg" />
             <div className="content">
               <div>
                 <p>Hello ,</p>

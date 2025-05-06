@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Context } from "../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 const Doctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -10,10 +11,9 @@ const Doctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:5003/api/v1/user/doctors",
-          { withCredentials: true }
-        );
+        const { data } = await axios.get(`${API_URL}/api/v1/user/doctors`, {
+          withCredentials: true,
+        });
         setDoctors(data.doctors);
       } catch (error) {
         toast.error(error.response.data.message);
@@ -26,10 +26,13 @@ const Doctors = () => {
     return <Navigate to={"/login"} />;
   }
   return (
-    <section className="doctors" style={{
-      width: "100%",
-      flex: "1",
-    }}>
+    <section
+      className="doctors"
+      style={{
+        width: "100%",
+        flex: "1",
+      }}
+    >
       <h1>DOCTORS</h1>
       <div className="banner">
         {doctors && doctors.length > 0 ? (

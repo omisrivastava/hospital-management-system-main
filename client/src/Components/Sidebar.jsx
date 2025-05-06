@@ -10,6 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../context/AuthContext";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { API_URL } from "../config";
 
 const Sidebar = () => {
   const [show, setShow] = useState(false);
@@ -19,7 +20,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     await axios
-      .get("http://localhost:5003/api/v1/user/admin/logout", {
+      .get(`${API_URL}/api/v1/user/admin/logout`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -55,35 +56,81 @@ const Sidebar = () => {
   };
 
   return (
-    <div style={{ display: "flex", backgroundColor: "#f0f0f0", }}>
+    <div style={{ display: "flex", backgroundColor: "#f0f0f0" }}>
       <div
-        style={{ display: location.pathname === "/login" ? "none" : "flex",
-          backgroundColor: "#fff", zIndex: 100213, width: "130px", paddingTop: "2rem", paddingBottom: "2rem", alignSelf: "flex-start", height: "100vh"
-         }}
+        style={{
+          display: location.pathname === "/login" ? "none" : "flex",
+          backgroundColor: "#fff",
+          zIndex: 100213,
+          width: "130px",
+          paddingTop: "2rem",
+          paddingBottom: "2rem",
+          alignSelf: "flex-start",
+          height: "100vh",
+        }}
         className={show ? "show" : ""}
       >
-        <div style={{ display: "flex", width:"100%", flexDirection: "column", gap: "2rem", alignItems: "center", paddingTop: "3rem" }}>
-          <TiHome style={{cursor:"pointer"}} size={32} onClick={gotoHomePage} />
-          <FaUserDoctor style={{cursor:"pointer"}} size={32} onClick={gotoDoctorsPage} />
-          <MdAddModerator style={{cursor:"pointer"}} size={32} onClick={gotoAddNewAdmin} />
-          <IoPersonAddSharp style={{cursor:"pointer"}} size={32} onClick={gotoAddNewDoctor} />
-          <AiFillMessage style={{cursor:"pointer"}} size={32} onClick={gotoMessagesPage} />
-          <RiLogoutBoxFill style={{cursor:"pointer"}} size={32} onClick={handleLogout} />
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            flexDirection: "column",
+            gap: "2rem",
+            alignItems: "center",
+            paddingTop: "3rem",
+          }}
+        >
+          <TiHome
+            style={{ cursor: "pointer" }}
+            size={32}
+            onClick={gotoHomePage}
+          />
+          <FaUserDoctor
+            style={{ cursor: "pointer" }}
+            size={32}
+            onClick={gotoDoctorsPage}
+          />
+          <MdAddModerator
+            style={{ cursor: "pointer" }}
+            size={32}
+            onClick={gotoAddNewAdmin}
+          />
+          <IoPersonAddSharp
+            style={{ cursor: "pointer" }}
+            size={32}
+            onClick={gotoAddNewDoctor}
+          />
+          <AiFillMessage
+            style={{ cursor: "pointer" }}
+            size={32}
+            onClick={gotoMessagesPage}
+          />
+          <RiLogoutBoxFill
+            style={{ cursor: "pointer" }}
+            size={32}
+            onClick={handleLogout}
+          />
         </div>
       </div>
       <div
         className="wrapper"
-        style={!isAuthenticated ? { display: "none", zIndex: 100213 } : { display: "flex", zIndex: 100213 }}
+        style={
+          !isAuthenticated
+            ? { display: "none", zIndex: 100213 }
+            : { display: "flex", zIndex: 100213 }
+        }
       >
         <GiHamburgerMenu className="hamburger" onClick={() => setShow(!show)} />
       </div>
-      <div style={{
-        paddingTop: "7rem",
-        paddingLeft: "2rem",
-        paddingRight: "2rem",
-        paddingBottom: "2rem",
-      }}>
-        <Outlet style={{ flex:"1"}}/>
+      <div
+        style={{
+          paddingTop: "7rem",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+          paddingBottom: "2rem",
+        }}
+      >
+        <Outlet style={{ flex: "1" }} />
       </div>
     </div>
   );

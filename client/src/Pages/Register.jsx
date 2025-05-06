@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { Context } from "../context/AuthContext";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 const Register = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
@@ -23,7 +24,7 @@ const Register = () => {
     try {
       await axios
         .post(
-          "http://localhost:5003/api/v1/user/patient/register",
+          `${API_URL}/api/v1/user/patient/register`,
           { firstName, lastName, email, phone, nic, dob, gender, password,role:'Patient' },
           {
             withCredentials: true,

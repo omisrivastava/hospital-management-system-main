@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../context/AuthContext";
 import axios from "axios";
+import { API_URL } from "../config";
 
 const AddNewDoctor = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
@@ -58,7 +59,7 @@ const AddNewDoctor = () => {
       formData.append("doctorDepartment", doctorDepartment);
       formData.append("docAvatar", docAvatar);
       await axios
-        .post("http://localhost:5003/api/v1/user/doctor/addnew", formData, {
+        .post(`${API_URL}/api/v1/user/doctor/addnew`, formData, {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         })
@@ -93,7 +94,7 @@ const AddNewDoctor = () => {
             <div>
               <img
                 src={
-                  docAvatarPreview ? `${docAvatarPreview}` : "/docHolder.jpg"
+                  docAvatarPreview ? `${docAvatarPreview}` : "docHolder(1).jpg"
                 }
                 alt="Doctor Avatar"
               />

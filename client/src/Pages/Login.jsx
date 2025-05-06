@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { Context } from "../context/AuthContext";
 import { Link, useNavigate, Navigate } from "react-router-dom";
+import {API_URL} from "../config";
 
 const Login = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
@@ -18,7 +19,7 @@ const Login = () => {
     try {
       await axios
         .post(
-          "http://localhost:5003/api/v1/user/login",
+          `${API_URL}/api/v1/user/login`,
           { email, password, confirmPassword, role: "Patient" },
           {
             withCredentials: true,
